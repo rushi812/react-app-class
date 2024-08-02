@@ -1,4 +1,4 @@
-import UserCard from "../components/UserCard";
+import UserCard, { withAdminRole } from "../components/UserCard";
 import useOnline from "../hooks/useOnline";
 import useUsersList from "../hooks/useUsersList";
 import Shimmer from "./Shimmer";
@@ -8,6 +8,8 @@ const Body = () => {
   const { usersData, filterDataFun } = useUsersList();
   const onlineStatus = useOnline();
 
+  const UserCardAdmin = withAdminRole(UserCard);
+
   if (onlineStatus === false) {
     return (
       <div>
@@ -15,6 +17,8 @@ const Body = () => {
       </div>
     );
   }
+
+  console.log(usersData);
 
   return usersData.length === 0 ? (
     <Shimmer />
@@ -32,17 +36,11 @@ const Body = () => {
         {usersData.map((user, index) => {
           return (
             <Link to={`/user/${user.id}`} key={user.id} className="">
-              <UserCard
-                fName={user.firstName}
-                lName={user.lastName}
-                mName={user.middleName}
-                gender={user.gender}
-                email={user.email}
-                phone={user.phone}
-                userImage={user.image}
-                address={user.address}
-                age={user.age}
-              />
+              {user.role === "admin" ? (
+                <UserCardAdmin userData={user} />
+              ) : (
+                <UserCard userData={user} />
+              )}
             </Link>
           );
         })}

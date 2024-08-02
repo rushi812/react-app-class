@@ -2,11 +2,11 @@ import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
-import Header from "./components/Header";
-import Body from "./components/Body";
-import Contact from "./components/Contact";
-import Error from "./components/Error";
-import User from "./components/User";
+import Header from "./src/components/Header";
+import Body from "./src/components/Body";
+import Contact from "./src/components/Contact";
+import Error from "./src/components/Error";
+import User from "./src/components/User";
 // import About from "./components/About";
 // import Recepies from "./components/Recepies";
 
@@ -25,8 +25,8 @@ const AppLayout = () => {
 // Dynamic Bundling
 // Lazy Loading
 
-const Recepies = lazy(() => import("./components/Recepies"));
-const About = lazy(() => import("./components/About"));
+const Recepies = lazy(() => import("./src/components/Recepies"));
+const About = lazy(() => import("./src/components/About"));
 
 const appRouter = createBrowserRouter([
   {
