@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useContext } from "react";
 
-const UserDetails = ({ accordionTitle, name, title }) => {
-  const [showDetails, setShowDetails] = useState(false);
+import UserContext from "../utils/UserContext";
 
-  const handleClick = () => {
-    setShowDetails(!showDetails);
-  };
-
+const UserDetails = ({
+  accordionTitle,
+  name,
+  title,
+  showDetails,
+  handleClick,
+  data,
+}) => {
+  const { loggedInUser } = useContext(UserContext);
   return (
     <div
       className="bg-gray-200 w-1/2 p-5  rounded-xl shadow-lg cursor-pointer"
@@ -14,12 +18,14 @@ const UserDetails = ({ accordionTitle, name, title }) => {
     >
       <div className="flex items-center justify-between">
         <span className="text-xl font-semibold">{accordionTitle}</span>
-        <span>⬇️</span>
+        <span>{showDetails ? "⬆️" : "⬇️"}</span>
       </div>
-      {showDetails === true && (
+      {showDetails && (
         <div>
           <p>{name}</p>
           <p>{title}</p>
+          {data}
+          {loggedInUser}
         </div>
       )}
     </div>

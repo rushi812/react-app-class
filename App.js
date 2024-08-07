@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { useState, useEffect, useContext, lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
@@ -7,16 +7,38 @@ import Body from "./src/components/Body";
 import Contact from "./src/components/Contact";
 import Error from "./src/components/Error";
 import User from "./src/components/User";
+import UserContext from "./src/utils/UserContext";
 // import About from "./components/About";
 // import Recepies from "./components/Recepies";
 
-import "../App.css";
+import "./App.css";
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+  // Authentication
+
+  const { loggedInUser } = useContext(UserContext);
+
+  useEffect(() => {
+    // auth api call
+    const data = {
+      name: "Rushiraj Brahmbhatt",
+    };
+
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div id="app">
-      <Header />
-      <Outlet />
+    <div>
+      <h1>{loggedInUser}</h1>
+      <UserContext.Provider value={{ loggedInUser: userName }}>
+        <div id="app">
+          <UserContext.Provider value={{ loggedInUser: "Elon Musk" }}>
+            <Header />
+          </UserContext.Provider>
+          <Outlet />
+        </div>
+      </UserContext.Provider>
     </div>
   );
 };

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const Body = () => {
   const { usersData, filterDataFun } = useUsersList();
   const onlineStatus = useOnline();
-
   const UserCardAdmin = withAdminRole(UserCard);
 
   if (onlineStatus === false) {
@@ -17,8 +16,6 @@ const Body = () => {
       </div>
     );
   }
-
-  console.log(usersData);
 
   return usersData.length === 0 ? (
     <Shimmer />

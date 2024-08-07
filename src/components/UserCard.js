@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
+
 const UserCard = (props) => {
   const { address, image, fName, lName, gender, phone, mName, age } =
     props.userData;
+
+  const { loggedInUser } = useContext(UserContext);
 
   const userAddress = `${address.address} ${address.city} ${address.state} ${address.stateCode} ${address.postalCode}`;
 
@@ -18,6 +23,7 @@ const UserCard = (props) => {
       <p>{gender}</p>
       <p>{phone}</p>
       <p>{userAddress}</p>
+      <p>User Name: {loggedInUser}</p>
     </div>
   );
 };
@@ -27,9 +33,9 @@ export const withAdminRole = (Component) => {
   return (props) => {
     return (
       <div className="relative">
-        <lable className="absolute bg-black text-white px-2 rounded-md top-2 left-2">
+        <label className="absolute bg-black text-white px-2 rounded-md top-2 left-2">
           {props.userData.role}
-        </lable>
+        </label>
         <Component userData={props.userData} />
       </div>
     );
