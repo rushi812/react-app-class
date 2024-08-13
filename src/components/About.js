@@ -1,15 +1,30 @@
-import { useContext } from "react";
-import UserContext from "../utils/UserContext";
+import React from "react";
+import MyDetails from "./MyDetails";
 
-const About = () => {
-  const { loggedInUser } = useContext(UserContext);
-  return (
-    <div>
-      <h1>About</h1>
-      <h2>Welcome - {loggedInUser} to About Page!</h2>
-      <p>This page gives info about our project!</p>
-    </div>
-  );
-};
+class About extends React.Component {
+  constructor(props) {
+    super(props);
+
+    console.log("Parent Constructor Called");
+  }
+
+  componentDidMount() {
+    console.log("Parent Component Did Mount");
+  }
+
+  render() {
+    console.log("Parent Render Called");
+
+    return (
+      <div className="p-5">
+        <h1>About</h1>
+        <h2>Welcome to About Page!</h2>
+        <MyDetails name="Rushiraj" location="India" />
+        <MyDetails name="Elon Musk" location="USA" />
+        <MyDetails name="Abdul" location="Pakistan" />
+      </div>
+    );
+  }
+}
 
 export default About;

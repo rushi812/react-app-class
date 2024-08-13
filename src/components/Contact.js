@@ -1,4 +1,14 @@
+import { useEffect } from "react";
+
 const Contact = () => {
+  useEffect(() => {
+    console.log("Contact useEffect Called!");
+
+    return () => {
+      console.log("Contact un-mounted!");
+    };
+  }, []);
+
   return (
     <div>
       <h1>Contact</h1>
